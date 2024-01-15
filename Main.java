@@ -1,20 +1,27 @@
 import javax.swing.*;
 import java.awt.event.*;
 public class Main {
+
+	public static void clearScreen() {  
+    	System.out.print("\033[H\033[2J");  
+    	System.out.flush();  
+	}
 	public static void main(String[] args) {
 		// System.out.println("\u001b[36mOutput");
 		// System.out.println("\u001b[0m");
 		Board board = new Board();
 		Player player = new Player(new int[] {3,3}, board.getWidth());
 
+		clearScreen();
 		System.out.println(player);
-		System.out.print(board);
+		System.out.println(board.drawBoard(player));
 		JFrame window = new JFrame("");
 
 		window.addKeyListener(new KeyListener(){
 			private String oldTile = "1";
 			@Override
 			public void keyPressed(KeyEvent e){
+				clearScreen();
 				char ch = e.getKeyChar();
 				System.out.println(ch);
 				player.calculateTruePos(board.getWidth());
@@ -24,7 +31,7 @@ public class Main {
 					System.exit(0);
 				}
 				System.out.println(player);
-				System.out.print(board);
+				System.out.println(board.drawBoard(player));
 			}
 			@Override
 			public void keyReleased(KeyEvent e){
