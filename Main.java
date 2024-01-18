@@ -7,13 +7,10 @@ public class Main {
     	System.out.flush();  
 	}
 	public static void main(String[] args) {
-		// System.out.println("\u001b[36mOutput");
-		// System.out.println("\u001b[0m");
 		Board board = new Board();
-		Player player = new Player(new int[] {3,3}, board.getWidth());
-
+		Player player = new Player(new int[] {3,7}, board.getWidth());
+		
 		clearScreen();
-		System.out.println(player);
 		System.out.println(board.drawBoard(player));
 		JFrame window = new JFrame("");
 
@@ -23,7 +20,6 @@ public class Main {
 			public void keyPressed(KeyEvent e){
 				clearScreen();
 				char ch = e.getKeyChar();
-				System.out.println(ch);
 				player.calculateTruePos(board.getWidth());
 				oldTile = board.doMove(ch, player, oldTile);
 				if(oldTile.equals("-1")){
